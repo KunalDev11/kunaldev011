@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kunal Dev — Senior Flutter & Android Engineer</title>
+  <meta name="description" content="Building high-performance cross-platform applications with native feel and global scalability.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    :root {
+      --bg: #0b0b0d;
+      --bg2: #111114;
+      --accent: #25d9ff;
+      --text: #fff;
+      --muted: #b3b3b3;
+      --neon-cyan: #00f5ff;
+      --neon-magenta: #ff00ff;
+      --bg-dark: #0a0a0f;
+      --glass-bg: rgba(255,255,255,0.07);
+      --radius: 18px;
+      --shadow: 0 4px 32px rgba(0,245,255,0.10);
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    * { box-sizing: border-box; scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    @font-face {
+      font-family: 'Inter';
+      src: url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    }
+    a { color: var(--accent); text-decoration: none; transition: var(--transition); }
+    a:hover { color: var(--neon-cyan); }
+    header {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(11, 11, 13, 0.8); 
+      padding: 1rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      z-index: 100; 
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .logo {
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .logo-circle {
+      width: 12px;
+      height: 12px;
+      background: var(--neon-cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--neon-cyan);
+    }
+    nav a {
+      margin-left: 1.5rem; 
+      font-weight: 500; 
+      font-size: .95rem;
+      letter-spacing: .01em;
+      position: relative;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--neon-cyan);
+      transition: var(--transition);
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+    .container {
+      max-width: 1200px; 
+      margin: 0 auto; 
+      padding: 0 2rem;
+      position: relative;
+      z-index: 2;
+    }
+    section { 
+      padding: 6rem 0 4rem; 
+      position: relative;
+    }
+    h2 { 
+      font-size: 2.5rem; 
+      margin-bottom: 2rem; 
+      letter-spacing: -.01em;
+      font-weight: 700;
+      position: relative;
+      display: inline-block;
+    }
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
+      border-radius: 3px;
+    }
+    .stats {
+      display: grid; 
+      grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+      gap: 2.5rem; 
+    }
+    .card {
+      background: var(--glass-bg);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      border: 1px solid rgba(255,255,255,0.10);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(0,245,255,0.1) 0%, rgba(0,245,255,0) 70%);
+      opacity: 0;
+      transition: var(--transition);
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0,245,255,0.2);
+      border-color: rgba(0,245,255,0.3);
+    }
+    .card:hover::before {
+      opacity: 1;
+    }
+    .card img {
+      width: 100%; 
+      border-radius: 12px; 
+      margin-bottom: 1.2rem;
+      aspect-ratio: 16/9; 
+      object-fit: cover;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      transition: var(--transition);
+    }
+    .card:hover img {
+      transform: scale(1.02);
+    }
+    .card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+    .card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1.2rem;
+    }
+    .card .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 1.5rem;
+    }
+    .tech-tag {
+      background: rgba(0,245,255,0.1);
+      color: var(--neon-cyan);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      border: 1px solid rgba(0,245,255,0.2);
+    }
+    .timeline {
+      position: relative; 
+      padding-left: 2.5rem; 
+      border-left: 2px solid var(--accent);
+    }
+    .timeline-item {
+      margin-bottom: 2.5rem;
+      position: relative;
+      padding-bottom: 1.5rem;
+    }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.7rem;
+      top: 5px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--neon-cyan);
+      box-shadow: 0 0 0 4px rgba(0,245,255,0.2);
+    }
+    .timeline-item h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-item .date {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+    .timeline-item p {
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    footer {
+      background: var(--bg2); 
+      padding: 3rem 0; 
+      text-align: center;
+      font-size: .95rem; 
+      color: var(--muted);
+      margin-top: 4rem;
+      position: relative;
+    }
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,245,255,0.5), transparent);
+    }
+    footer a { 
+      margin: 0 .8rem; 
+      font-size: 1.4em; 
+      display: inline-block;
+    }
+    footer a:hover {
+      transform: translateY(-3px);
+    }
+    .hero-ai {
+      position: relative; 
+      height: 100vh; 
+      display: flex;
+      align-items: center; 
+      justify-content: center;
+      background: var(--bg-dark); 
+      overflow: hidden;
+    }
+    #canvas-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 900px;
+      padding: 0 2rem;
+    }
+    .glass-card {
+      position: relative; 
+      z-index: 1;
+      padding: 3.5rem 3rem;
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 24px;
+      text-align: center;
+      box-shadow: 0 0 40px rgba(0,245,255,0.2);
+      animation: float 8s ease-in-out infinite;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%     { transform: translateY(-15px); }
+    }
+    .glitch {
+      position: relative;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      color: white;
+      letter-spacing: 0.02em;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0; left: 0; width: 100%;
+      overflow: hidden;
+    }
+    .glitch::before {
+      animation: glitch-1 2.5s infinite linear alternate-reverse;
+      color: var(--neon-cyan); 
+      z-index: -1;
+      text-shadow: 2px 0 var(--neon-cyan);
+    }
+    .glitch::after {
+      animation: glitch-2 2.5s infinite linear alternate-reverse;
+      color: var(--neon-magenta); 
+      z-index: -2;
+      text-shadow: -2px 0 var(--neon-magenta);
+    }
+    @keyframes glitch-1 {
+      0% { clip-path: polygon(0 20%, 100% 20%, 100% 60%, 0 60%); transform: translate(-4px, 4px); }
+      100% { clip-path: polygon(0 80%, 100% 80%, 100% 100%, 0 100%); transform: translate(4px, -4px); }
+    }
+    @keyframes glitch-2 {
+      0% { clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%); transform: translate(4px, -4px); }
+      100% { clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%); transform: translate(-4px, 4px); }
+    }
+    .ai-glow {
+      color: var(--neon-cyan);
+      text-shadow: 0 0 8px var(--neon-cyan), 0 0 16px var(--neon-cyan);
+      position: relative;
+      display: inline-block;
+    }
+    .ai-glow::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--neon-cyan);
+      box-shadow: 0 0 10px var(--neon-cyan);
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+    .ai-glow:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    .tagline {
+      margin: 1.5rem 0 2.5rem;
+      font-size: 1.2rem;
+      color: #ccc;
+      line-height: 1.6;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin: 3rem 0;
+    }
+    .stat-item {
+      text-align: center;
+    }
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    .stat-label {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+    .cta-row { 
+      display: flex; 
+      justify-content: center; 
+      gap: 1.5rem; 
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+    .btn-glow {
+      padding: 1rem 2.2rem; 
+      margin: .5rem;
+      border: none; 
+      border-radius: 50px;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+      color: #000;
+      box-shadow: 0 0 15px var(--neon-cyan), 0 0 30px rgba(0,245,255,0.3);
+      transition: var(--transition);
+      font-size: 1rem;
+      cursor: pointer;
+      outline: none;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .btn-glow::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(0,245,255,0.8), rgba(255,0,255,0.8));
+      z-index: -1;
+      opacity: 0;
+      transition: var(--transition);
+    }
+    .btn-glow:hover, .btn-glow:focus {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 0 25px var(--neon-cyan), 0 0 50px rgba(0,245,255,0.5);
+    }
+    .btn-glow:hover::before {
+      opacity: 1;
+    }
+    .btn-glow.secondary {
+      background: transparent;
+      color: var(--neon-cyan);
+      box-shadow: 0 0 15px rgba(0,245,255,0.3) inset;
+      border: 1.5px solid var(--neon-cyan);
+    }
+    .btn-glow.secondary::before {
+      background: rgba(0,245,255,0.2);
+    }
+    .btn-glow i {
+      margin-right: 8px;
+    }
+    ul { 
+      padding-left: 1.5em;
+      list-style-type: none;
+    }
+    ul li {
+      position: relative;
+      padding-left: 1.8rem;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    ul li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--neon-cyan);
+    }
+    .section-title {
+      display: flex;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+    .section-number {
+      color: var(--neon-cyan);
+      font-family: 'SF Mono', monospace;
+      font-size: 1.2rem;
+      margin-right: 1rem;
+    }
+    .section-divider {
+      height: 1px;
+      flex-grow: 1;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+      margin-left: 1rem;
+    }
+    .opensource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    .opensource-card {
+      background: var(--glass-bg);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: var(--transition);
+    }
+    .opensource-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(0,245,255,0.3);
+    }
+    .opensource-card h3 {
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .opensource-card .stars {
+      color: var(--neon-cyan);
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+    }
+    .opensource-card .stars i {
+      margin-right: 5px;
+    }
+    .opensource-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .opensource-card .repo-link {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--neon-cyan);
+    }
+    .awards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    .award-card {
+      background: var(--glass-bg);
+      border-radius: var(--radius);
+      padding: 1.8rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    .award-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--neon-cyan), var(--neon-magenta));
+    }
+    .award-card:hover {
+      transform: translateY(-5px);
+    }
+    .award-card h3 {
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+    }
+    .award-card h3 i {
+      color: var(--neon-cyan);
+      margin-right: 10px;
+    }
+    .award-card .date {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .award-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-control {
+      width: 100%;
+      padding: 1rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      color: white;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 10px rgba(0,245,255,0.2);
+    }
+    textarea.form-control {
+      min-height: 150px;
+      resize: vertical;
+    }
+    .submit-btn {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta));
+      color: black;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .submit-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0,245,255,0.4);
+    }
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+    }
+    @media (max-width: 1024px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      .container { padding: 0 1.5rem; }
+      .glass-card { padding: 2.5rem 1.5rem; }
+      section { padding: 4rem 0 2rem; }
+      nav { display: none; }
+      .mobile-menu-btn {
+        display: block;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 480px) {
+      .container { padding: 0 1rem; }
+      .glass-card { padding: 2rem 1rem; }
+      section { padding: 3rem 0 1.5rem; }
+      .hero-ai { min-height: 80vh; height: auto; padding: 6rem 0; }
+      .cta-row {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .btn-glow {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <span class="logo-circle"></span>
+    Kunal Dev
+  </div>
+  <nav>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#opensource">Open-Source</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<div id="canvas-container"></div>
+
+<div class="container">
+  <!-- AI-Inspired Hero -->
+  <section class="hero-ai">
+    <div class="particles" id="particles-js"></div>
+    
+    <div class="hero-content">
+      <div class="glass-card">
+        <h1>
+          <span class="glitch" data-text="Kunal Dev">Kunal Dev</span>
+          <br>
+          <span style="font-size: 1.5rem;">Senior</span> <span class="ai-glow">Flutter & Android</span> Engineer
+        </h1>
+        <p class="tagline">
+          I build high-performance cross-platform applications that feel native, scale globally, 
+          and ship fast. With 6+ years of experience and 1M+ downloads across 50+ live apps, 
+          I specialize in creating polished user experiences with Flutter and native Android.
+        </p>
+
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">10+</div>
+            <div class="stat-label">Live Apps</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">1TH+</div>
+            <div class="stat-label">Downloads</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">4.8★</div>
+            <div class="stat-label">Avg Rating</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">6+</div>
+            <div class="stat-label">Years Exp</div>
+          </div>
+        </div>
+
+        <div class="cta-row">
+          <!-- <a class="btn-glow" href="https://raw.githubusercontent.com/kunaldev011/kunaldev011/main/resume.pdf" target="_blank">
+            <i class="fas fa-file-download"></i> Download Résumé
+          </a> -->
+          <a class="btn-glow secondary" href="#contact">
+            <i class="fas fa-paper-plane"></i> Get In Touch
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-title">
+      <span class="section-number">01.</span>
+      <h2>Featured Projects</h2>
+      <div class="section-divider"></div>
+    </div>
+    
+    <div class="stats">
+      <!-- LAP Autocare -->
+      <div class="card">
+        <img src="https://play-lh.googleusercontent.com/0xSukMHtfajRX9xlD1IIQTZVXnCtKjsHTExfNAurCygbjoeynQiknt5Y6WaNZitT96U=w526-h296-rw" alt="LAP Autocare">
+        <h3>LAP Autocare Services</h3>
+        <div class="tech-tags">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">Node.js</span>
+          <span class="tech-tag">PayU</span>
+          <span class="tech-tag">GetX</span>
+        </div>
+        <p>A comprehensive vehicle service platform with real-time tracking, payment integration, and service history management.</p>
+        <a href="https://play.google.com/store/apps/details?id=com.lap.autocare" target="_blank">View on Play Store →</a>
+      </div>
+
+      <!-- LAP SARATHI -->
+      <div class="card">
+        <img src="https://play-lh.googleusercontent.com/Fq0WAOluVfOPgDsifRiFqerfoNa5fC_vDNEQ-DJTcTz9wPFsxbj2ow9p2CdUOtvFHw=w526-h296-rw" alt="LAP SARATHI">
+        <h3>LAP SARATHI</h3>
+        <div class="tech-tags">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">Node.js</span>
+          <span class="tech-tag">PDF</span>
+          <span class="tech-tag">Dynamic Pricing</span>
+        </div>
+        <p>On-demand mechanic service app with dynamic pricing, PDF report generation, and real-time job allocation.</p>
+        <a href="https://play.google.com/store/apps/details?id=com.lapcare.mechanic" target="_blank">View on Play Store →</a>
+      </div>
+
+      <!-- Zadd -->
+      <div class="card">
+        <img src="https://play-lh.googleusercontent.com/GO7-HjiOPXI4mDXHfttaZb00mX6g48bz24UOUlqNGSmkFSpoenbdr0HaTipzqVAIOQ=w526-h296-rw" alt="Zadd">
+        <h3>Zadd E-commerce</h3>
+        <div class="tech-tags">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">Node.js</span>
+          <span class="tech-tag">Razorpay</span>
+          <span class="tech-tag">PWA</span>
+        </div>
+        <p>Full-featured e-commerce solution with Progressive Web App support, Razorpay integration, and inventory management.</p>
+        <a href="https://play.google.com/store/apps/details?id=com.app.zadd" target="_blank">View on Play Store →</a>
+      </div>
+
+      <!-- BBMart -->
+      <div class="card">
+        <img src="https://play-lh.googleusercontent.com/334Xfnu4T7HrBUCywD_W8NiPQKHaxCZfRRWU-d4aQk_abl2N-9Si6evi_UgcOH8a2Y4n=w526-h296-rw" alt="BBMart">
+        <h3>BBMart Pet Store</h3>
+        <div class="tech-tags">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">Node.js</span>
+          <span class="tech-tag">Next-Day Delivery</span>
+        </div>
+        <p>Specialized pet store app with next-day delivery scheduling, product subscriptions, and veterinary consultation.</p>
+        <a href="https://play.google.com/store/apps/details?id=com.app.veterinary" target="_blank">View on Play Store →</a>
+      </div>
+
+      <!-- SSOJS-BLR -->
+      <div class="card">
+        <img src="https://play-lh.googleusercontent.com/gjaGxDYfsGiKLK-DOGdtPfXdzkJf5uOEMuSyCJuTqmFHJrzSYHJSMTPr5wYltFZX244=w526-h296-rw" alt="SSOJS-BLR">
+        <h3>SSOJS-BLR</h3>
+        <div class="tech-tags">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">Community</span>
+          <span class="tech-tag">Event Calendar</span>
+        </div>
+        <p>Community networking app for medical professionals with event management, calendar integration, and discussion forums.</p>
+        <a href="https://play.google.com/store/apps/details?id=com.app.plus91&hl=en" target="_blank">View on Play Store →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Add this section right after the existing projects section -->
+<section id="more-projects">
+  <div class="section-title">
+    <span class="section-number">02.</span>
+    <h2>Additional Projects</h2>
+    <div class="section-divider"></div>
+  </div>
+  
+  <div class="stats">
+    <!-- MandirWiki -->
+    <div class="card">
+      <img src="https://play-lh.googleusercontent.com/5V2bQ4k0X6Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4=w526-h296-rw" alt="MandirWiki">
+      <h3>MandirWiki</h3>
+      <div class="tech-tags">
+        <span class="tech-tag">Flutter</span>
+        <span class="tech-tag">Firebase</span>
+        <span class="tech-tag">Wiki System</span>
+        <span class="tech-tag">Community</span>
+      </div>
+      <p>A comprehensive knowledge base for Hindu temples with user-contributed content, historical information, and pilgrimage planning tools.</p>
+      <a href="https://play.google.com/store/apps/details?id=com.mandir.wiki&hl=en_IN" target="_blank">View on Play Store →</a>
+    </div>
+
+    <!-- ClassPlx -->
+    <div class="card">
+      <img src="https://play-lh.googleusercontent.com/5V2bQ4k0X6Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4=w526-h296-rw" alt="ClassPlx">
+      <h3>ClassPlx</h3>
+      <div class="tech-tags">
+        <span class="tech-tag">Flutter</span>
+        <span class="tech-tag">Education</span>
+        <span class="tech-tag">Video Streaming</span>
+        <span class="tech-tag">Firebase</span>
+      </div>
+      <p>An educational platform with course management, live classes, and video streaming capabilities for students and teachers.</p>
+      <a href="https://play.google.com/store/apps/details?id=com.classplxplus&hl=en_IN" target="_blank">View on Play Store →</a>
+    </div>
+
+    <!-- Number Dekho -->
+    <div class="card">
+      <img src="https://play-lh.googleusercontent.com/5V2bQ4k0X6Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4=w526-h296-rw" alt="Number Dekho">
+      <h3>Number Dekho</h3>
+      <div class="tech-tags">
+        <span class="tech-tag">Flutter</span>
+        <span class="tech-tag">PHP</span>
+        <span class="tech-tag">Service App</span>
+        <span class="tech-tag">Firebase</span>
+      </div>
+      <p>Need a plumber, electrician, or AC repair expert urgently?
+NumberDekho connects you with verified service professionals near you — fast, easy, and reliable!
+
+Whether it’s home cleaning, appliance repair, beauty services, or pest control, NumberDekho helps you discover and book top-rated service providers in your area within seconds..</p>
+      <a href="https://play.google.com/store/apps/details?id=com.numberdekho&hl=en_IN" target="_blank">View on Play Store →</a>
+    </div>
+
+    <!-- Number Dekho Partner -->
+    <div class="card">
+      <img src="https://play-lh.googleusercontent.com/5V2bQ4k0X6Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4=w526-h296-rw" alt="Number Dekho Partner">
+      <h3>Number Dekho Partner</h3>
+      <div class="tech-tags">
+        <span class="tech-tag">Flutter</span>
+        <span class="tech-tag">Partner App</span>
+        <span class="tech-tag">Admin Dashboard</span>
+        <span class="tech-tag">Firebase</span>
+      </div>
+      <p>Partner application Number Dekho Partner helps skilled workers like electricians, plumbers, AC technicians, beauticians, cleaners, and more connect with real customers nearby — and grow their income fast!</p>
+      <a href="https://play.google.com/store/apps/details?id=com.numberdekho.partner&hl=en_IN" target="_blank">View on Play Store →</a>
+    </div>
+
+    <!-- Agrex.ai -->
+    <div class="card">
+      <img src="https://play-lh.googleusercontent.com/5V2bQ4k0X6Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4=w526-h296-rw" alt="Agrex.ai">
+      <h3>Agrex.ai Dashboard</h3>
+      <div class="tech-tags">
+        <span class="tech-tag">Flutter</span>
+        <span class="tech-tag">IoT</span>
+        <span class="tech-tag">Data Visualization</span>
+        <span class="tech-tag">TWA</span>
+      </div>
+      <p>IoT agriculture dashboard with real-time sensor data visualization, predictive analytics, and TWA implementation.</p>
+      <a href="https://play.google.com/store/apps/details?id=com.agrex.dashboard.twa&hl=en_IN" target="_blank">View on Play Store →</a>
+    </div>
+  </div>
+</section>
+
+  <section id="experience">
+    <div class="section-title">
+      <span class="section-number">02.</span>
+      <h2>Professional Experience</h2>
+      <div class="section-divider"></div>
+    </div>
+    
+  <div class="timeline">
+    <!-- New Freelance Section -->
+    <div class="timeline-item">
+      <h3>Freelance Flutter Developer · Self-Employed</h3>
+      <span class="date">April 2024 – Present</span>
+      <p>
+     Developed and delivered scalable Flutter applications for 8+ Indian startups in service-based and e-commerce industries. 
+    Focused on creating robust mobile architectures with Firebase backend integration while optimizing app performance and user experience.
+  </p>
+  <ul>
+    <li>Built 6 production-ready applications with 4.8+ average Play Store ratings</li>
+    <li>Enhanced app performance, reducing load times by 35% through advanced optimization</li>
+    <li>Implemented CI/CD pipelines for 3 client projects, streamlining deployment processes</li>
+  </ul>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <h3>Senior Flutter Developer · Mariox Software</h3>
+        <span class="date">April 2023 – April 2024</span>
+        <p>
+          Led migration of 4 legacy native Android apps to Flutter, reducing crash rate from 2.3% to 0.4%. 
+          Implemented CI/CD pipelines reducing release time by 40%. Mentored junior developers in Flutter best practices.
+        </p>
+      </div>
+      <div class="timeline-item">
+        <h3>Flutter Developer · Agrex.ai</h3>
+        <span class="date">August 2021 – April 2023</span>
+        <p>
+          Developed IoT dashboard with real-time data visualization and on-device ML capabilities. 
+          Achieved 4.7★ average rating with optimized performance for low-end devices.
+        </p>
+      </div>
+      <div class="timeline-item">
+        <h3>Android Developer · Pro Innovative Software</h3>
+        <span class="date">June 2020 – August 2021</span>
+        <p>
+          Built 5 modular e-commerce components reducing development time by 30%. 
+          Optimized APK size by 28% through resource optimization and ProGuard rules.
+        </p>
+      </div>
+      <div class="timeline-item">
+        <h3>Python Developer Intern · CSIR-NPL</h3>
+        <span class="date">March 2020 – April 2020</span>
+        <p>
+          Created lab equipment automation scripts reducing manual work by 60%. 
+          Developed data visualization tools for experimental results.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="opensource">
+    <div class="section-title">
+      <span class="section-number">03.</span>
+      <h2>Open-Source Contributions</h2>
+      <div class="section-divider"></div>
+    </div>
+    
+    <div class="opensource-grid">
+      <div class="opensource-card">
+        <h3>
+          flutter_clean_starter
+          <span class="stars"><i class="fas fa-star"></i> 400+</span>
+        </h3>
+        <p>
+          A production-grade Flutter starter template with clean architecture, BLoC state management, 
+          and pre-configured CI/CD workflows. Includes common utilities for faster development.
+        </p>
+        <a href="https://github.com/kunaldev011/flutter_clean_starter" target="_blank" class="repo-link">
+          View Repository →
+        </a>
+      </div>
+      
+      <div class="opensource-card">
+        <h3>
+          firebase_dart_helpers
+          <span class="stars"><i class="fas fa-star"></i> 200+</span>
+        </h3>
+        <p>
+          Collection of utility functions and extensions for Firebase in Dart. Simplifies common 
+          operations like query building, batch writes, and realtime database management.
+        </p>
+        <a href="https://github.com/kunaldev011/firebase_dart_helpers" target="_blank" class="repo-link">
+          View Repository →
+        </a>
+      </div>
+    </div>
+    
+    <div class="section-title" style="margin-top: 4rem;">
+      <span class="section-number">04.</span>
+      <h2>Certifications & Awards</h2>
+      <div class="section-divider"></div>
+    </div>
+    
+    <div class="awards-grid">
+      <div class="award-card">
+        <h3><i class="fas fa-award"></i> Google Associate Android Developer</h3>
+        <span class="date">2022</span>
+        <p>
+          Officially certified by Google in Android development fundamentals, architecture components, 
+          and best practices for building high-quality apps.
+        </p>
+      </div>
+      
+      <div class="award-card">
+        <h3><i class="fas fa-medal"></i> Flutter Favorite Contributor</h3>
+        <span class="date">2023</span>
+        <p>
+          Recognized by the Flutter team for significant contributions to the Flutter ecosystem 
+          through open-source packages and community support.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-title">
+      <span class="section-number">05.</span>
+      <h2>Get In Touch</h2>
+      <div class="section-divider"></div>
+    </div>
+    
+    <div class="contact-form">
+      <form id="contactForm" action="https://formspree.io/f/xovlwdrp" method="POST">
+        <div class="form-group">
+          <input type="text" class="form-control" name="name" placeholder="Your Name" required>
+        </div>
+        <div class="form-group">
+          <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+        </div>
+        <div class="form-group">
+          <textarea class="form-control" name="message" placeholder="Your Message" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <p>
+    <a href="https://linkedin.com/in/kunal-644129104" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    <a href="mailto:kunaldev011@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+    <a href="https://github.com/kunaldev011" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+    <a href="https://twitter.com/kunaldev011" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+  </p>
+  <p>© 2025 Kunal Dev. All rights reserved.</p>
+  <p>Built with passion using Three.js, GSAP, and plain CSS.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
+<script>
+  // Three.js Animation
+  document.addEventListener('DOMContentLoaded', () => {
+    // Scene setup
+    const canvasContainer = document.getElementById('canvas-container');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    canvasContainer.appendChild(renderer.domElement);
+
+    // Particles
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particlesCount = 1500;
+    const posArray = new Float32Array(particlesCount * 3);
+
+    for(let i = 0; i < particlesCount * 3; i++) {
+      posArray[i] = (Math.random() - 0.5) * 10;
+    }
+
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+    
+    const particlesMaterial = new THREE.PointsMaterial({
+      size: 0.02,
+      color: 0x00f5ff,
+      transparent: true,
+      opacity: 0.8,
+      blending: THREE.AdditiveBlending
+    });
+
+    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(particlesMesh);
+
+    // Animated torus
+    const torusGeometry = new THREE.TorusGeometry(1, 0.4, 16, 60);
+    const torusMaterial = new THREE.MeshBasicMaterial({ 
+      color: 0xff00ff,
+      wireframe: true,
+      transparent: true,
+      opacity: 0.6
+    });
+    const torus = new THREE.Mesh(torusGeometry, torusMaterial);
+    torus.position.z = -5;
+    scene.add(torus);
+
+    // Camera position
+    camera.position.z = 3;
+
+    // Animation loop
+    function animate() {
+      requestAnimationFrame(animate);
+      
+      particlesMesh.rotation.x += 0.0005;
+      particlesMesh.rotation.y += 0.0005;
+      
+      torus.rotation.x += 0.005;
+      torus.rotation.y += 0.005;
+      
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // Handle resize
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // GSAP animations
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // Animate sections on scroll
+    gsap.utils.toArray('section').forEach(section => {
+      gsap.from(section, {
+        scrollTrigger: {
+          trigger: section,
+          start: "top 80%",
+          toggleActions: "play none none none"
+        },
+        y: 50,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out"
+      });
+    });
+    
+    // Animate cards
+    gsap.utils.toArray('.card').forEach((card, i) => {
+      gsap.from(card, {
+        scrollTrigger: {
+          trigger: card,
+          start: "top 80%",
+          toggleActions: "play none none none"
+        },
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        delay: i * 0.1,
+        ease: "back.out(1.7)"
+      });
+    });
+    
+    // Floating animation for hero elements
+    const heroElements = document.querySelectorAll('.glass-card, .btn-glow');
+    heroElements.forEach(el => {
+      gsap.to(el, {
+        y: 10,
+        duration: 3,
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut"
+      });
+    });
+  });
+</script>
+</body>
+</html>
