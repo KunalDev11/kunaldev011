@@ -635,6 +635,204 @@
         width: 100%;
       }
     }
+    /* Screenshot Gallery Styles */
+    .project-gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 1.5rem;
+    }
+
+    .project-cover {
+      width: 100%;
+      height: auto;
+      max-height: 400px;
+      object-fit: contain;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+
+    .screenshots-container {
+      position: relative;
+    }
+
+    .screenshots {
+      display: flex;
+      gap: 15px;
+      padding: 15px 0;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .screenshots::-webkit-scrollbar {
+      display: none;
+    }
+
+    .screenshot-thumb {
+      width: 50px; /* Smaller width for phone shape */
+      height: 110px; /* Taller height to match phone aspect ratio */
+      object-fit: cover;
+      border-radius: 6px;
+      scroll-snap-align: start;
+      flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,0.15);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      background: var(--bg-dark);
+    }
+
+    /* Phone frame effect */
+    .screenshot-thumb::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      border: 2px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      pointer-events: none;
+    }
+
+    .screenshot-thumb::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 30px;
+      height: 4px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 2px;
+    }
+
+    .screenshot-thumb:hover {
+      transform: scale(1.1);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 15px rgba(0,245,255,0.3);
+    }
+
+    /* Navigation arrows */
+    .scroll-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 32px;
+      height: 32px;
+      background: rgba(11,11,13,0.8);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 2;
+      opacity: 0;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--neon-cyan);
+    }
+
+    .scroll-arrow:hover {
+      background: rgba(0,245,255,0.2);
+    }
+
+    .scroll-arrow.left {
+      left: 5px;
+      padding-right: 2px;
+    }
+
+    .scroll-arrow.right {
+      right: 5px;
+      padding-left: 2px;
+    }
+
+    .screenshots-container:hover .scroll-arrow {
+      opacity: 1;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .project-cover {
+        max-height: 300px;
+      }
+      
+      .screenshot-thumb {
+        width: 70px;
+        height: 140px;
+      }
+      
+      .scroll-arrow {
+        width: 28px;
+        height: 28px;
+      }
+    }
+      .project-gallery {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+    
+    .project-cover {
+      width: 100%;
+      border-radius: 12px;
+      height: 180px;
+      object-fit: cover;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      transition: var(--transition);
+    }
+    
+    .screenshots {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    
+    .screenshot-thumb {
+      width: 60px;
+      height: 120px;
+      border-radius: 8px;
+      object-fit: cover;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: var(--transition);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .screenshot-thumb:hover {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    
+    /* Lightbox styles */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.9);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 8px;
+    }
+    
+    .close-lightbox {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -642,7 +840,7 @@
 <header>
   <div class="logo">
     <span class="logo-circle"></span>
-    Kunal Dev
+    Kunal
   </div>
   <nav>
     <a href="#projects">Projects</a>
@@ -662,7 +860,7 @@
     <div class="hero-content">
       <div class="glass-card">
         <h1>
-          <span class="glitch" data-text="Kunal Dev">Kunal Dev</span>
+          <span class="glitch" data-text="Kunal">Kunal </span>
           <br>
           <span style="font-size: 1.5rem;">Senior</span> <span class="ai-glow">Flutter & Android</span> Engineer
         </h1>
@@ -711,9 +909,138 @@
     </div>
     
     <div class="stats">
-      <!-- LAP Autocare -->
+    
+
+      <!-- Zadd -->
       <div class="card">
-        <img src="https://play-lh.googleusercontent.com/0xSukMHtfajRX9xlD1IIQTZVXnCtKjsHTExfNAurCygbjoeynQiknt5Y6WaNZitT96U=w526-h296-rw" alt="LAP Autocare">
+        <div class="project-gallery">
+          <img src="assets/projects/zadd/screen1.webp" alt="zadd" class="project-cover" loading="lazy">
+          <div class="screenshots-container">
+            <div class="screenshots">
+              <picture>
+                <source srcset="assets/projects/zadd/screen1.webp" type="image/webp">
+                <source srcset="assets/projects/zadd/screen1.webp" type="image/jpeg">
+                <img src="assets/projects/zadd/screen1.webp" 
+                     alt="Zadd Screenshot 1" 
+                     class="screenshot-thumb"
+                     loading="lazy"
+                     width="400"
+                     height="800">
+              </picture>
+              <picture>
+                <source srcset="assets/projects/zadd/screen2.webp" type="image/webp">
+                <source srcset="assets/projects/zadd/screen2.webp" type="image/jpeg">
+                <img src="assets/projects/zadd/screen2.webp" 
+                     alt="Zadd Screenshot 2" 
+                     class="screenshot-thumb"
+                     loading="lazy"
+                     width="400"
+                     height="800">
+              </picture>
+              <picture>
+                <source srcset="assets/projects/zadd/screen3.webp" type="image/webp">
+                <source srcset="assets/projects/zadd/screen3.webp" type="image/jpeg">
+                <img src="assets/projects/zadd/screen3.webp" 
+                     alt="Zadd Screenshot 3" 
+                     class="screenshot-thumb"
+                     loading="lazy"
+                     width="400"
+                     height="800">
+              </picture>
+               <picture>
+                <source srcset="assets/projects/zadd/screen4.webp" type="image/webp">
+                <source srcset="assets/projects/zadd/screen4.webp" type="image/jpeg">
+                <img src="assets/projects/zadd/screen4.webp" 
+                     alt="Zadd Screenshot 4" 
+                     class="screenshot-thumb"
+                     loading="lazy"
+                     width="400"
+                     height="800">
+              </picture>
+              <picture>
+                <source srcset="assets/projects/zadd/screen5.webp" type="image/webp">
+                <source srcset="assets/projects/zadd/screen5.webp" type="image/jpeg">
+                <img src="assets/projects/zadd/screen5.webp" 
+                     alt="zadd 5" 
+                     class="screenshot-thumb"
+                     loading="lazy"
+                     width="400"
+                     height="800">
+              </picture>
+          
+            </div>
+          </div>
+           </div>
+        <h3>Zadd E-commerce</h3>
+        <div class="tech-tags">
+          <span class="tech-tag">Flutter</span>
+          <span class="tech-tag">Node.js</span>
+          <span class="tech-tag">Razorpay</span>
+          <span class="tech-tag">PWA</span>
+        </div>
+        <p>Full-featured e-commerce solution with Progressive Web App support, Razorpay integration, and inventory management.</p>
+        <a href="https://play.google.com/store/apps/details?id=com.app.zadd" target="_blank">View on Play Store →</a>
+      </div>
+<!-- LAP Autocare -->
+      <div class="card">
+        <div class="project-gallery">
+          <img src="assets/projects/autoCare/cover.png" alt="LAP Autocare" class="project-cover" loading="lazy">
+          <div class="screenshots-container">
+            <div class="screenshots">
+              <picture>
+                <source srcset="assets/projects/autoCare/screen1.webp" type="image/webp">
+                <source srcset="assets/projects/autoCare/screen1.webp" type="image/jpeg">
+                <img src="assets/projects/autoCare/screen1.webp" 
+                     alt="LAP Autocare Screenshot 1" 
+                     class="screenshot-thumb"
+                     loading="lazy"
+                     width="400"
+                     height="800">
+              </picture>
+              <picture>
+                <source srcset="assets/projects/autoCare/screen2.webp" type="image/webp">
+                <source srcset="assets/projects/autoCare/screen2.webp" type="image/jpeg">
+                <img src="assets/projects/autoCare/screen2.webp" 
+                     alt="LAP Autocare Screenshot 2" 
+                     class="screenshot-thumb"
+                     loading="lazy"
+                     width="400"
+                     height="800">
+              </picture>
+              <picture>
+                <source srcset="assets/projects/autoCare/screen3.webp" type="image/webp">
+                <source srcset="assets/projects/autoCare/screen3.webp" type="image/jpeg">
+                <img src="assets/projects/autoCare/screen3.webp" 
+                     alt="LAP Autocare Screenshot 3" 
+                     class="screenshot-thumb"
+                     loading="lazy"
+                     width="400"
+                     height="800">
+              </picture>
+               <picture>
+                <source srcset="assets/projects/autoCare/screen4.webp" type="image/webp">
+                <source srcset="assets/projects/autoCare/screen4.webp" type="image/jpeg">
+                <img src="assets/projects/autoCare/screen4.webp" 
+                     alt="LAP Autocare Screenshot 1" 
+                     class="screenshot-thumb"
+                     loading="lazy"
+                     width="400"
+                     height="800">
+              </picture>
+              <picture>
+                <source srcset="assets/projects/autoCare/screen5.webp" type="image/webp">
+                <source srcset="assets/projects/autoCare/screen5.webp" type="image/jpeg">
+                <img src="assets/projects/autoCare/screen5.webp" 
+                     alt="LAP Autocare Screenshot 2" 
+                     class="screenshot-thumb"
+                     loading="lazy"
+                     width="400"
+                     height="800">
+              </picture>
+          
+            </div>
+          </div>
+        </div>
         <h3>LAP Autocare Services</h3>
         <div class="tech-tags">
           <span class="tech-tag">Flutter</span>
@@ -727,7 +1054,64 @@
 
       <!-- LAP SARATHI -->
       <div class="card">
-        <img src="https://play-lh.googleusercontent.com/Fq0WAOluVfOPgDsifRiFqerfoNa5fC_vDNEQ-DJTcTz9wPFsxbj2ow9p2CdUOtvFHw=w526-h296-rw" alt="LAP SARATHI">
+      <div class="project-gallery">
+              <img src="assets/projects/sarthi/cover.png" alt="LAP Autocare sarthi" class="project-cover" loading="lazy">
+              <div class="screenshots-container">
+                <div class="screenshots">
+                  <picture>
+                    <source srcset="assets/projects/sarthi/screen1.webp" type="image/webp">
+                    <source srcset="assets/projects/sarthi/screen1.webp" type="image/jpeg">
+                    <img src="assets/projects/sarthi/screen1.webp" 
+                        alt="LAP Autocare Screenshot 1" 
+                        class="screenshot-thumb"
+                        loading="lazy"
+                        width="400"
+                        height="800">
+                  </picture>
+                  <picture>
+                    <source srcset="assets/projects/sarthi/screen2.webp" type="image/webp">
+                    <source srcset="assets/projects/sarthi/screen2.webp" type="image/jpeg">
+                    <img src="assets/projects/sarthi/screen2.webp" 
+                        alt="LAP Autocare Screenshot 2" 
+                        class="screenshot-thumb"
+                        loading="lazy"
+                        width="400"
+                        height="800">
+                  </picture>
+                  <picture>
+                    <source srcset="assets/projects/sarthi/screen3.webp" type="image/webp">
+                    <source srcset="assets/projects/sarthi/screen3.webp" type="image/jpeg">
+                    <img src="assets/projects/sarthi/screen3.webp" 
+                        alt="LAP Autocare Screenshot 3" 
+                        class="screenshot-thumb"
+                        loading="lazy"
+                        width="400"
+                        height="800">
+                  </picture>
+                  <picture>
+                    <source srcset="assets/projects/sarthi/screen4.png" type="image/webp">
+                    <source srcset="assets/projects/sarthi/screen4.png" type="image/jpeg">
+                    <img src="assets/projects/sarthi/screen4.png" 
+                        alt="LAP Autocare Screenshot 1" 
+                        class="screenshot-thumb"
+                        loading="lazy"
+                        width="400"
+                        height="800">
+                  </picture>
+                  <picture>
+                    <source srcset="assets/projects/sarthi/screen5.png" type="image/webp">
+                    <source srcset="assets/projects/sarthi/screen5.png" type="image/jpeg">
+                    <img src="assets/projects/sarthi/screen5.png" 
+                        alt="LAP Autocare Screenshot 2" 
+                        class="screenshot-thumb"
+                        loading="lazy"
+                        width="400"
+                        height="800">
+                  </picture>
+              
+                </div>
+              </div>
+            </div>
         <h3>LAP SARATHI</h3>
         <div class="tech-tags">
           <span class="tech-tag">Flutter</span>
@@ -738,24 +1122,138 @@
         <p>On-demand mechanic service app with dynamic pricing, PDF report generation, and real-time job allocation.</p>
         <a href="https://play.google.com/store/apps/details?id=com.lapcare.mechanic" target="_blank">View on Play Store →</a>
       </div>
-
-      <!-- Zadd -->
+ 
+      <!-- SSOJS-BLR -->
       <div class="card">
-        <img src="https://play-lh.googleusercontent.com/GO7-HjiOPXI4mDXHfttaZb00mX6g48bz24UOUlqNGSmkFSpoenbdr0HaTipzqVAIOQ=w526-h296-rw" alt="Zadd">
-        <h3>Zadd E-commerce</h3>
+<div class="project-gallery">
+          <img src="assets/projects/SSOJS/cover.png" alt="SSOJS" class="project-cover" loading="lazy">
+          <div class="screenshots-container">
+            <div class="screenshots">
+              <picture>
+                <source srcset="assets/projects/SSOJS/screen1.png" type="image/webp">
+                <source srcset="assets/projects/SSOJS/screen1.png" type="image/jpeg">
+                <img src="assets/projects/SSOJS/screen1.png" 
+                     alt="SSOJS Screenshot 1" 
+                     class="screenshot-thumb"
+                     loading="lazy"
+                     width="400"
+                     height="800">
+              </picture>
+              <picture>
+                <source srcset="assets/projects/SSOJS/screen2.png" type="image/png">
+                <source srcset="assets/projects/SSOJS/screen2.png" type="image/jpeg">
+                <img src="assets/projects/SSOJS/screen2.png" 
+                     alt="SSOJS Screenshot 2" 
+                     class="screenshot-thumb"
+                     loading="lazy"
+                     width="400"
+                     height="800">
+              </picture>
+              <picture>
+                <source srcset="assets/projects/SSOJS/screen3.png" type="image/png">
+                <source srcset="assets/projects/SSOJS/screen3.png" type="image/jpeg">
+                <img src="assets/projects/SSOJS/screen3.png" 
+                     alt="SSOJS Screenshot 3" 
+                     class="screenshot-thumb"
+                     loading="lazy"
+                     width="400"
+                     height="800">
+              </picture>
+               <picture>
+                <source srcset="assets/projects/SSOJS/screen4.png" type="image/png">
+                <source srcset="assets/projects/SSOJS/screen4.png" type="image/jpeg">
+                <img src="assets/projects/SSOJS/screen4.png" 
+                     alt="SSOJS Screenshot 4" 
+                     class="screenshot-thumb"
+                     loading="lazy"
+                     width="400"
+                     height="800">
+              </picture>
+              <picture>
+                <source srcset="assets/projects/SSOJS/screen5.png" type="image/png">
+                <source srcset="assets/projects/SSOJS/screen5.png" type="image/jpeg">
+                <img src="assets/projects/SSOJS/screen5.png" 
+                     alt="SSOJS 5" 
+                     class="screenshot-thumb"
+                     loading="lazy"
+                     width="400"
+                     height="800">
+              </picture>
+          
+            </div>
+          </div>
+           </div>
+           
+        <h3>SSOJS-BLR</h3>
         <div class="tech-tags">
           <span class="tech-tag">Flutter</span>
-          <span class="tech-tag">Node.js</span>
-          <span class="tech-tag">Razorpay</span>
-          <span class="tech-tag">PWA</span>
+          <span class="tech-tag">Community</span>
+          <span class="tech-tag">Event Calendar</span>
         </div>
-        <p>Full-featured e-commerce solution with Progressive Web App support, Razorpay integration, and inventory management.</p>
-        <a href="https://play.google.com/store/apps/details?id=com.app.zadd" target="_blank">View on Play Store →</a>
+        <p>Community networking app for medical professionals with event management, calendar integration, and discussion forums.</p>
+        <a href="https://play.google.com/store/apps/details?id=com.app.plus91&hl=en" target="_blank">View on Play Store →</a>
       </div>
-
+  
       <!-- BBMart -->
       <div class="card">
-        <img src="https://play-lh.googleusercontent.com/334Xfnu4T7HrBUCywD_W8NiPQKHaxCZfRRWU-d4aQk_abl2N-9Si6evi_UgcOH8a2Y4n=w526-h296-rw" alt="BBMart">
+   <div class="project-gallery">
+          <img src="assets/projects/bbmart/cover.png" alt="bbmart" class="project-cover" loading="lazy">
+          <div class="screenshots-container">
+            <div class="screenshots">
+              <picture>
+                <source srcset="assets/projects/bbmart/screen1.png" type="image/webp">
+                <source srcset="assets/projects/bbmart/screen1.png" type="image/jpeg">
+                <img src="assets/projects/bbmart/screen1.png" 
+                     alt="bbmart Screenshot 1" 
+                     class="screenshot-thumb"
+                     loading="lazy"
+                     width="400"
+                     height="800">
+              </picture>
+              <picture>
+                <source srcset="assets/projects/bbmart/screen2.png" type="image/png">
+                <source srcset="assets/projects/bbmart/screen2.png" type="image/jpeg">
+                <img src="assets/projects/bbmart/screen2.png" 
+                     alt="bbmart Screenshot 2" 
+                     class="screenshot-thumb"
+                     loading="lazy"
+                     width="400"
+                     height="800">
+              </picture>
+              <picture>
+                <source srcset="assets/projects/bbmart/screen3.png" type="image/png">
+                <source srcset="assets/projects/bbmart/screen3.png" type="image/jpeg">
+                <img src="assets/projects/bbmart/screen3.png" 
+                     alt="bbmart Screenshot 3" 
+                     class="screenshot-thumb"
+                     loading="lazy"
+                     width="400"
+                     height="800">
+              </picture>
+               <picture>
+                <source srcset="assets/projects/bbmart/screen4.png" type="image/png">
+                <source srcset="assets/projects/bbmart/screen4.png" type="image/jpeg">
+                <img src="assets/projects/bbmart/screen4.png" 
+                     alt="bbmart Screenshot 4" 
+                     class="screenshot-thumb"
+                     loading="lazy"
+                     width="400"
+                     height="800">
+              </picture>
+              <picture>
+                <source srcset="assets/projects/bbmart/screen5.png" type="image/png">
+                <source srcset="assets/projects/bbmart/screen5.png" type="image/jpeg">
+                <img src="assets/projects/bbmart/screen5.png" 
+                     alt="bbmart 5" 
+                     class="screenshot-thumb"
+                     loading="lazy"
+                     width="400"
+                     height="800">
+              </picture>
+          
+            </div>
+          </div>
+           </div>
         <h3>BBMart Pet Store</h3>
         <div class="tech-tags">
           <span class="tech-tag">Flutter</span>
@@ -766,18 +1264,7 @@
         <a href="https://play.google.com/store/apps/details?id=com.app.veterinary" target="_blank">View on Play Store →</a>
       </div>
 
-      <!-- SSOJS-BLR -->
-      <div class="card">
-        <img src="https://play-lh.googleusercontent.com/gjaGxDYfsGiKLK-DOGdtPfXdzkJf5uOEMuSyCJuTqmFHJrzSYHJSMTPr5wYltFZX244=w526-h296-rw" alt="SSOJS-BLR">
-        <h3>SSOJS-BLR</h3>
-        <div class="tech-tags">
-          <span class="tech-tag">Flutter</span>
-          <span class="tech-tag">Community</span>
-          <span class="tech-tag">Event Calendar</span>
-        </div>
-        <p>Community networking app for medical professionals with event management, calendar integration, and discussion forums.</p>
-        <a href="https://play.google.com/store/apps/details?id=com.app.plus91&hl=en" target="_blank">View on Play Store →</a>
-      </div>
+      
     </div>
   </section>
 
@@ -790,10 +1277,67 @@
   </div>
   
   <div class="stats">
-    <!-- MandirWiki -->
+   <!-- MandirWiki -->
     <div class="card">
-      <img src="https://play-lh.googleusercontent.com/5V2bQ4k0X6Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4=w526-h296-rw" alt="MandirWiki">
-      <h3>MandirWiki</h3>
+        <div class="project-gallery">
+              <img src="assets/projects/mandirWiki/cover.png" alt="MandirWiki" class="project-cover" loading="lazy">
+              <div class="screenshots-container">
+                <div class="screenshots">
+                  <picture>
+                    <source srcset="assets/projects/mandirWiki/screen1.webp" type="image/webp">
+                    <source srcset="assets/projects/mandirWiki/screen1.webp" type="image/jpeg">
+                    <img src="assets/projects/mandirWiki/screen1.webp" 
+                        alt="mandirWiki 1" 
+                        class="screenshot-thumb"
+                        loading="lazy"
+                        width="400"
+                        height="800">
+                  </picture>
+                  <picture>
+                    <source srcset="assets/projects/mandirWiki/screen2.webp" type="image/webp">
+                    <source srcset="assets/projects/mandirWiki/screen2.webp" type="image/jpeg">
+                    <img src="assets/projects/mandirWiki/screen2.webp" 
+                        alt="mandirWiki 2" 
+                        class="screenshot-thumb"
+                        loading="lazy"
+                        width="400"
+                        height="800">
+                  </picture>
+                  <picture>
+                    <source srcset="assets/projects/mandirWiki/screen3.webp" type="image/webp">
+                    <source srcset="assets/projects/mandirWiki/screen3.webp" type="image/jpeg">
+                    <img src="assets/projects/mandirWiki/screen3.webp" 
+                        alt="mandirWiki 3" 
+                        class="screenshot-thumb"
+                        loading="lazy"
+                        width="400"
+                        height="800">
+                  </picture>
+                  <picture>
+                    <source srcset="assets/projects/mandirWiki/screen4.webp" type="image/webp">
+                    <source srcset="assets/projects/mandirWiki/screen4.webp" type="image/jpeg">
+                    <img src="assets/projects/mandirWiki/screen4.webp" 
+                        alt="mandirWiki 4" 
+                        class="screenshot-thumb"
+                        loading="lazy"
+                        width="400"
+                        height="800">
+                  </picture>
+                  <picture>
+                    <source srcset="assets/projects/mandirWiki/screen5.webp" type="image/webp">
+                    <source srcset="assets/projects/mandirWiki/screen5.webp" type="image/jpeg">
+                    <img src="assets/projects/mandirWiki/screen5.webp" 
+                        alt="mandirWiki 5" 
+                        class="screenshot-thumb"
+                        loading="lazy"
+                        width="400"
+                        height="800">
+                  </picture>
+              
+                </div>
+              </div>
+            </div>
+        <h3>MandirWiki</h3>
       <div class="tech-tags">
         <span class="tech-tag">Flutter</span>
         <span class="tech-tag">Firebase</span>
@@ -806,8 +1350,65 @@
 
     <!-- ClassPlx -->
     <div class="card">
-      <img src="https://play-lh.googleusercontent.com/5V2bQ4k0X6Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4=w526-h296-rw" alt="ClassPlx">
-      <h3>ClassPlx</h3>
+        <div class="project-gallery">
+              <img src="assets/projects/classPlx/cover.png" alt="classPlx" class="project-cover" loading="lazy">
+              <div class="screenshots-container">
+                <div class="screenshots">
+                  <picture>
+                    <source srcset="assets/projects/classPlx/screen1.webp" type="image/webp">
+                    <source srcset="assets/projects/classPlx/screen1.webp" type="image/jpeg">
+                    <img src="assets/projects/classPlx/screen1.webp" 
+                        alt="classPlx 1" 
+                        class="screenshot-thumb"
+                        loading="lazy"
+                        width="400"
+                        height="800">
+                  </picture>
+                  <picture>
+                    <source srcset="assets/projects/classPlx/screen2.webp" type="image/webp">
+                    <source srcset="assets/projects/classPlx/screen2.webp" type="image/jpeg">
+                    <img src="assets/projects/classPlx/screen2.webp" 
+                        alt="classPlx 2" 
+                        class="screenshot-thumb"
+                        loading="lazy"
+                        width="400"
+                        height="800">
+                  </picture>
+                  <picture>
+                    <source srcset="assets/projects/classPlx/screen3.webp" type="image/webp">
+                    <source srcset="assets/projects/classPlx/screen3.webp" type="image/jpeg">
+                    <img src="assets/projects/classPlx/screen3.webp" 
+                        alt="classPlx 3" 
+                        class="screenshot-thumb"
+                        loading="lazy"
+                        width="400"
+                        height="800">
+                  </picture>
+                  <picture>
+                    <source srcset="assets/projects/classPlx/screen4.webp" type="image/webp">
+                    <source srcset="assets/projects/classPlx/screen4.webp" type="image/jpeg">
+                    <img src="assets/projects/classPlx/screen4.webp" 
+                        alt="classPlx 4" 
+                        class="screenshot-thumb"
+                        loading="lazy"
+                        width="400"
+                        height="800">
+                  </picture>
+                  <picture>
+                    <source srcset="assets/projects/classPlx/screen5.webp" type="image/webp">
+                    <source srcset="assets/projects/classPlx/screen5.webp" type="image/jpeg">
+                    <img src="assets/projects/classPlx/screen5.webp" 
+                        alt="classPlx 5" 
+                        class="screenshot-thumb"
+                        loading="lazy"
+                        width="400"
+                        height="800">
+                  </picture>
+              
+                </div>
+              </div>
+          </div>
+                  <h3>ClassPlx</h3>
       <div class="tech-tags">
         <span class="tech-tag">Flutter</span>
         <span class="tech-tag">Education</span>
@@ -818,27 +1419,144 @@
       <a href="https://play.google.com/store/apps/details?id=com.classplxplus&hl=en_IN" target="_blank">View on Play Store →</a>
     </div>
 
-    <!-- Number Dekho -->
+
+   
+     <!-- Number Dekho -->
     <div class="card">
-      <img src="https://play-lh.googleusercontent.com/5V2bQ4k0X6Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4=w526-h296-rw" alt="Number Dekho">
-      <h3>Number Dekho</h3>
-      <div class="tech-tags">
-        <span class="tech-tag">Flutter</span>
-        <span class="tech-tag">PHP</span>
-        <span class="tech-tag">Service App</span>
-        <span class="tech-tag">Firebase</span>
+      <div class="project-gallery">
+        <img src="assets/projects/numberdekho/cover.png" alt="Number Dekho" class="project-cover" loading="lazy">
+         <!-- Screenshots (using picture tag for responsiveness) -->
+      <div class="screenshots-container">
+        <div class="screenshots">
+          <picture>
+            <source srcset="assets/projects/numberdekho/screen1.webp" type="image/webp">
+            <source srcset="assets/projects/numberdekho/screen1.webp" type="image/jpeg">
+            <img src="assets/projects/numberdekho/screen1.webp" 
+                alt="Home Screen" 
+                class="screenshot-thumb"
+                loading="lazy"
+                width="400"
+                height="800">
+          </picture>
+          
+          <picture>
+            <source srcset="assets/projects/numberdekho/screen2.webp" type="image/webp">
+            <source srcset="assets/projects/numberdekho/screen2.webp" type="image/jpeg">
+            <img src="assets/projects/numberdekho/screen2.webp" 
+                alt="dashboard Selection" 
+                class="screenshot-thumb"
+                loading="lazy"
+                width="400"
+                height="800">
+          </picture>
+            <picture>
+            <source srcset="assets/projects/numberdekho/screen3.webp" type="image/webp">
+            <source srcset="assets/projects/numberdekho/screen3.webp" type="image/jpeg">
+            <img src="assets/projects/numberdekho/screen3.webp" 
+                alt="Service Selection" 
+                class="screenshot-thumb"
+                loading="lazy"
+                width="400"
+                height="800">
+          </picture>
+            <picture>
+            <source srcset="assets/projects/numberdekho/screen4.webp" type="image/webp">
+            <source srcset="assets/projects/numberdekho/screen4.webp" type="image/jpeg">
+            <img src="assets/projects/numberdekho/screen4.webp" 
+                alt="Service Selection" 
+                class="screenshot-thumb"
+                loading="lazy"
+                width="400"
+                height="800">
+          </picture>
+           </picture>
+            <picture>
+            <source srcset="assets/projects/numberdekho/screen5.webp" type="image/webp">
+            <source srcset="assets/projects/numberdekho/screen5.webp" type="image/jpeg">
+            <img src="assets/projects/numberdekho/screen5.webp" 
+                alt="Service Selection" 
+                class="screenshot-thumb"
+                loading="lazy"
+                width="400"
+                height="800">
+          </picture>
+        </div>
+          
+          <h3>Number Dekho</h3>
+          <div class="tech-tags">
+            <span class="tech-tag">Flutter</span>
+            <span class="tech-tag">Firebase</span>
+            <span class="tech-tag">PHP</span>
+            <span class="tech-tag">Service App</span>
+          </div>
+          <p>On-demand service app connecting users with verified professionals for home services, repairs, and maintenance.</p>
+          <a href="https://play.google.com/store/apps/details?id=com.numberdekho" target="_blank">View on Play Store →</a>
+        </div>
+
       </div>
-      <p>Need a plumber, electrician, or AC repair expert urgently?
-NumberDekho connects you with verified service professionals near you — fast, easy, and reliable!
-
-Whether it’s home cleaning, appliance repair, beauty services, or pest control, NumberDekho helps you discover and book top-rated service providers in your area within seconds..</p>
-      <a href="https://play.google.com/store/apps/details?id=com.numberdekho&hl=en_IN" target="_blank">View on Play Store →</a>
     </div>
-
     <!-- Number Dekho Partner -->
     <div class="card">
-      <img src="https://play-lh.googleusercontent.com/5V2bQ4k0X6Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4=w526-h296-rw" alt="Number Dekho Partner">
-      <h3>Number Dekho Partner</h3>
+        <div class="project-gallery">
+        <img src="assets/projects/partner/cover.png" alt="Number Dekho" class="project-cover" loading="lazy">
+         <!-- Screenshots (using picture tag for responsiveness) -->
+       <div class="screenshots-container">
+        <div class="screenshots">
+      <picture>
+        <source srcset="assets/projects/partner/screen1.webp" type="image/webp">
+        <source srcset="assets/projects/partner/screen1.webp" type="image/jpeg">
+        <img src="assets/projects/partner/screen1.webp" 
+             alt="Home Screen" 
+             class="screenshot-thumb"
+             loading="lazy"
+             width="400"
+             height="800">
+      </picture>
+      
+      <picture>
+        <source srcset="assets/projects/partner/screen2.webp" type="image/webp">
+        <source srcset="assets/projects/partner/screen2.webp" type="image/jpeg">
+        <img src="assets/projects/partner/screen2.webp" 
+             alt="dashboard Selection" 
+             class="screenshot-thumb"
+             loading="lazy"
+             width="400"
+             height="800">
+      </picture>
+         <picture>
+        <source srcset="assets/projects/partner/screen3.webp" type="image/webp">
+        <source srcset="assets/projects/partner/screen3.webp" type="image/jpeg">
+        <img src="assets/projects/partner/screen3.webp" 
+             alt="Service Selection" 
+             class="screenshot-thumb"
+             loading="lazy"
+             width="400"
+             height="800">
+      </picture>
+       <picture>
+        <source srcset="assets/projects/partner/screen4.webp" type="image/webp">
+        <source srcset="assets/projects/partner/screen4.webp" type="image/jpeg">
+        <img src="assets/projects/partner/screen4.webp" 
+             alt="dashboard Selection" 
+             class="screenshot-thumb"
+             loading="lazy"
+             width="400"
+             height="800">
+      </picture>
+         <picture>
+        <source srcset="assets/projects/partner/screen5.webp" type="image/webp">
+        <source srcset="assets/projects/partner/screen5.webp" type="image/jpeg">
+        <img src="assets/projects/partner/screen5.webp" 
+             alt="Service Selection" 
+             class="screenshot-thumb"
+             loading="lazy"
+             width="400"
+             height="800">
+      </picture>
+        </div>
+        </div>
+        </div>
+     <h3>Number Dekho Partner</h3>
       <div class="tech-tags">
         <span class="tech-tag">Flutter</span>
         <span class="tech-tag">Partner App</span>
@@ -851,7 +1569,65 @@ Whether it’s home cleaning, appliance repair, beauty services, or pest control
 
     <!-- Agrex.ai -->
     <div class="card">
-      <img src="https://play-lh.googleusercontent.com/5V2bQ4k0X6Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4Q3XQ4=w526-h296-rw" alt="Agrex.ai">
+ <div class="project-gallery">
+        <img src="assets/projects/agrex/screen1.jpeg" alt="agrex" class="project-cover" loading="lazy">
+         <!-- Screenshots (using picture tag for responsiveness) -->
+       <div class="screenshots-container">
+        <div class="screenshots">
+      <picture>
+        <source srcset="assets/projects/agrex/screen1.jpeg" type="image/webp">
+        <source srcset="assets/projects/agrex/screen1.jpeg" type="image/jpeg">
+        <img src="assets/projects/agrex/screen1.jpeg" 
+             alt="agrex Home Screen" 
+             class="screenshot-thumb"
+             loading="lazy"
+             width="400"
+             height="800">
+      </picture>
+      
+      <picture>
+        <source srcset="assets/projects/agrex/screen2.webp" type="image/webp">
+        <source srcset="assets/projects/agrex/screen2.webp" type="image/jpeg">
+        <img src="assets/projects/agrex/screen2.webp" 
+             alt="agrex dashboard Selection" 
+             class="screenshot-thumb"
+             loading="lazy"
+             width="400"
+             height="800">
+      </picture>
+         <picture>
+        <source srcset="assets/projects/agrex/screen3.png" type="image/webp">
+        <source srcset="assets/projects/agrex/screen3.png" type="image/jpeg">
+        <img src="assets/projects/agrex/screen3.png" 
+             alt="agrex 2" 
+             class="screenshot-thumb"
+             loading="lazy"
+             width="400"
+             height="800">
+      </picture>
+       <picture>
+        <source srcset="assets/projects/agrex/screen4.png" type="image/webp">
+        <source srcset="assets/projects/agrex/screen4.png" type="image/jpeg">
+        <img src="assets/projects/agrex/screen4.png" 
+             alt="dashboard agrex" 
+             class="screenshot-thumb"
+             loading="lazy"
+             width="400"
+             height="800">
+      </picture>
+         <picture>
+        <source srcset="assets/projects/agrex/screen5.png" type="image/webp">
+        <source srcset="assets/projects/agrex/screen5.png" type="image/jpeg">
+        <img src="assets/projects/agrex/screen5.png" 
+             alt="agrex 5" 
+             class="screenshot-thumb"
+             loading="lazy"
+             width="400"
+             height="800">
+      </picture>
+        </div>
+        </div>
+        </div>
       <h3>Agrex.ai Dashboard</h3>
       <div class="tech-tags">
         <span class="tech-tag">Flutter</span>
@@ -1013,6 +1789,43 @@ Whether it’s home cleaning, appliance repair, beauty services, or pest control
       </form>
     </div>
   </section>
+  
+<!-- Lightbox HTML -->
+<div id="lightbox" class="lightbox">
+  <span class="close-lightbox">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
+</div>
+
+<!-- [Your existing scripts remain the same] -->
+
+<!-- Add this script for the lightbox functionality -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Lightbox functionality
+    const thumbs = document.querySelectorAll('.screenshot-thumb');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.querySelector('.close-lightbox');
+    
+    thumbs.forEach(thumb => {
+      thumb.addEventListener('click', () => {
+        lightboxImg.src = thumb.src;
+        lightboxImg.alt = thumb.alt;
+        lightbox.style.display = 'flex';
+      });
+    });
+    
+    closeBtn.addEventListener('click', () => {
+      lightbox.style.display = 'none';
+    });
+    
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        lightbox.style.display = 'none';
+      }
+    });
+  });
+</script>
 </div>
 
 <footer>
@@ -1022,7 +1835,7 @@ Whether it’s home cleaning, appliance repair, beauty services, or pest control
     <a href="https://github.com/kunaldev011" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
     <a href="https://twitter.com/kunaldev011" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
   </p>
-  <p>© 2025 Kunal Dev. All rights reserved.</p>
+  <p>© 2025 Kunal . All rights reserved.</p>
   <p>Built with passion using Three.js, GSAP, and plain CSS.</p>
 </footer>
 
@@ -1030,6 +1843,7 @@ Whether it’s home cleaning, appliance repair, beauty services, or pest control
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
 <script>
+  
   // Three.js Animation
   document.addEventListener('DOMContentLoaded', () => {
     // Scene setup
@@ -1143,6 +1957,69 @@ Whether it’s home cleaning, appliance repair, beauty services, or pest control
         yoyo: true,
         ease: "sine.inOut"
       });
+    });
+  });
+  
+</script>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox">
+  <span class="close-lightbox">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
+</div>
+
+<script>
+  // Screenshot scrolling functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all screenshot galleries
+    document.querySelectorAll('.screenshots-container').forEach(container => {
+      const screenshots = container.querySelector('.screenshots');
+      const leftArrow = container.querySelector('.scroll-arrow.left');
+      const rightArrow = container.querySelector('.scroll-arrow.right');
+      
+      leftArrow.addEventListener('click', () => {
+        screenshots.scrollBy({ left: -200, behavior: 'smooth' });
+      });
+      
+      rightArrow.addEventListener('click', () => {
+        screenshots.scrollBy({ left: 200, behavior: 'smooth' });
+      });
+      
+      // Hide arrows when at extremes
+      const checkArrows = () => {
+        leftArrow.style.display = screenshots.scrollLeft <= 10 ? 'none' : 'flex';
+        rightArrow.style.display = screenshots.scrollLeft >= screenshots.scrollWidth - screenshots.clientWidth - 10 ? 'none' : 'flex';
+      };
+      
+      screenshots.addEventListener('scroll', checkArrows);
+      checkArrows();
+    });
+    
+    // Lightbox functionality
+    const thumbs = document.querySelectorAll('.screenshot-thumb');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.querySelector('.close-lightbox');
+    
+    thumbs.forEach(thumb => {
+      thumb.addEventListener('click', () => {
+        lightboxImg.src = thumb.src;
+        lightboxImg.alt = thumb.alt;
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+      });
+    });
+    
+    closeBtn.addEventListener('click', () => {
+      lightbox.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    });
+    
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      }
     });
   });
 </script>
