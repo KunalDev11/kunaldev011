@@ -182,6 +182,15 @@
       font-weight: 500;
       border: 1px solid rgba(0,245,255,0.2);
     }
+    .tech-head {
+      background: rgba(0, 247, 255, 0);
+      color: var(--neon-cyan);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-shadow: 0 0 1px var(--neon-cyan), 0 0 10px var(--neon-cyan);
+    }
     .timeline {
       position: relative; 
       padding-left: 2.5rem; 
@@ -320,6 +329,32 @@
     @keyframes glitch-2 {
       0% { clip-path: polygon(0 60%, 100% 60%, 100% 80%, 0 80%); transform: translate(4px, -4px); }
       100% { clip-path: polygon(0 20%, 100% 20%, 100% 40%, 0 40%); transform: translate(-4px, 4px); }
+    }
+      
+        .pro-name {
+      font-size: clamp(2.2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: .02em;
+      position: relative;
+      display: inline-block;
+      cursor: default;
+    }
+
+    .pro-name::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: #00f5ff;
+      box-shadow: 0 0 6px #00f5ff;
+      transition: width .4s ease;
+    }
+
+    .pro-name:hover::after {
+      width: 100%;
     }
     .ai-glow {
       color: var(--neon-cyan);
@@ -859,8 +894,78 @@
     
     <div class="hero-content">
       <div class="glass-card">
-        <h1>
-          <span class="glitch" data-text="Kunal">Kunal </span>
+               <!-- <h1>
+          <style>
+          .pro-name {
+            font-size: clamp(2.5rem, 6vw, 3.5rem);
+            font-weight: 700;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: -0.03em; /* Tighter spacing */
+            position: relative;
+            display: inline-block;
+            cursor: default;
+            padding-bottom: 4px;
+          }
+
+          /* Underline animation */
+          .pro-name::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 1px;
+            background: #00f5ff;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+          }
+
+          .pro-name:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+          }
+
+          /* Letter containers */
+          .pro-name span {
+            position: relative;
+            display: inline-block;
+            transition: all 0.3s ease;
+            margin-right: -0.05em; /* Compensate for tight spacing */
+          }
+
+          /* Hover effects */
+          .pro-name:hover span {
+            color: #00f5ff;
+            transform: translateY(-2px);
+          }
+
+          /* Sequential animation */
+          .pro-name:hover span:nth-child(1) { transition-delay: 0.05s; }
+          .pro-name:hover span:nth-child(2) { transition-delay: 0.1s; }
+          .pro-name:hover span:nth-child(3) { transition-delay: 0.15s; }
+          .pro-name:hover span:nth-child(4) { transition-delay: 0.2s; }
+          .pro-name:hover span:nth-child(5) { transition-delay: 0.25s; }
+
+          /* Subtle glow */
+          .pro-name:hover {
+            text-shadow: 0 0 8px rgba(0, 245, 255, 0.3);
+          }
+        </style>
+
+        <h1 class="pro-name">
+          <span class="stat-number">K</span>
+          <span class="stat-number">u</span>
+          <span class="stat-number">n</span>
+          <span class="stat-number">a</span>
+          <span class="stat-number">l</span>
+        </h1> -->
+        <h1 class="tech-head">
+          
+                    <span style="font-size: 3.5rem;" data-text="Kunal">Kunal </span>
+
+        </h1>
           <br>
           <span style="font-size: 1.5rem;">Senior</span> <span class="ai-glow">Flutter & Android</span> Engineer
         </h1>
@@ -1586,9 +1691,9 @@
       </picture>
       
       <picture>
-        <source srcset="assets/projects/agrex/screen2.webp" type="image/webp">
-        <source srcset="assets/projects/agrex/screen2.webp" type="image/jpeg">
-        <img src="assets/projects/agrex/screen2.webp" 
+        <source srcset="assets/projects/agrex/screen2.png" type="image/webp">
+        <source srcset="assets/projects/agrex/screen2.png" type="image/jpeg">
+        <img src="assets/projects/agrex/screen2.png" 
              alt="agrex dashboard Selection" 
              class="screenshot-thumb"
              loading="lazy"
