@@ -9,6 +9,42 @@
     content="Building high-performance cross-platform applications with native feel and global scalability.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <script>
+// Disable right click
+document.addEventListener("contextmenu", function(e) {
+  e.preventDefault();
+});
+
+// Disable common DevTools shortcuts
+document.addEventListener("keydown", function(e) {
+
+  // F12
+  if (e.key === "F12") {
+    e.preventDefault();
+  }
+
+  // Ctrl+Shift+I (Inspect)
+  if (e.ctrlKey && e.shiftKey && e.key === "I") {
+    e.preventDefault();
+  }
+
+  // Ctrl+Shift+J (Console)
+  if (e.ctrlKey && e.shiftKey && e.key === "J") {
+    e.preventDefault();
+  }
+
+  // Ctrl+U (View Source)
+  if (e.ctrlKey && e.key === "u") {
+    e.preventDefault();
+  }
+
+  // Ctrl+Shift+C (Inspect element)
+  if (e.ctrlKey && e.shiftKey && e.key === "C") {
+    e.preventDefault();
+  }
+
+});
+</script>
   <style>
     :root {
       --neon-cyan: #00f5ff;
